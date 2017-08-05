@@ -1,11 +1,3 @@
-/*
- *  This sketch sends data via HTTP GET requests to data.sparkfun.com service.
- *
- *  You need to get streamId and privateKey at data.sparkfun.com and paste them
- *  below. Or just customize this script to talk to other HTTP servers.
- *
- */
-
 #include <stdio.h>
 #include <ESP8266WiFi.h>
 #include <IRsend.h>
@@ -61,7 +53,7 @@ IRsend irsend2(3); // GPIO3 (Rx)
 
 char buff[64];
 
-// TODO: refactor this nonsense
+// TODO: refactor this awful nonsense of a function
 void handle_cmd(String cmd) {
   if (cmd.equals("set ac1 temp 18")) {
     irsend1.sendRaw(on_18cmd, sizeof(on_18cmd) / sizeof(on_18cmd[0]), 38);
@@ -144,7 +136,6 @@ void loop() {
   Serial.print("Connecting to ");
   Serial.println(host);
 
-  // Use WiFiClient class to create TCP connections
   WiFiClient client;
   if (!client.connect(host, PORT)) {
     Serial.println("Connection failed. Will return loop().");
